@@ -3,3 +3,4 @@ idea/
 allure-results/
 .idea
 package-lock.json
+allure-report/
