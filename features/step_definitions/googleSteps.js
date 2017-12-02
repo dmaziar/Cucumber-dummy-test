@@ -15,6 +15,6 @@ defineSupportCode(function({Given, Then, When}) {
 
   Then(/^nordea is on the first place$/, function () {
      googlePage.results[0].waitForVisible()
-     assert.equal(googlePage.results[0].getText(), 'https://www.nordea.dk/')
+     assert.equal(googlePage.results[0].getText(), 'https://www.nordea.dk1/')
   });
 })

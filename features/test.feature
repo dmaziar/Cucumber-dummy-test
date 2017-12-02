@@ -7,4 +7,4 @@ Feature: test feature
 Examples:
 | test |
 | 1 |
-| 2 |
+#| 2 |

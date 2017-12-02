@@ -1,42 +1,44 @@
 let util = require('util'),
-    events = require('events');
-let Allure = require('allure-js-commons');
-let allure = new Allure();
-let id =0;
+    events = require('events'),
+    Allure = require('allure-js-commons'),
+    AllureRuntime = require('allure-js-commons/runtime'),
+    allureRuntime = new AllureRuntime(),
+    allure = new Allure(),
+    id =0;
 
 let testReporter2 = function(options) {
     allure.setOptions({ targetDir: options.outputDir || 'allure-results' })
 
     this.on('suite:start', function(suit) {
         if (suit.parent === null) {
-            console.log('Suit')
             allure.startSuite(suit.title);
         } else {
-            console.log('Case')
+            // allureRuntime.addLabel('Bug','123456')
             allure.startCase(suit.title+id);
         }
         id++;
-        console.log('Suit start');
     });
 
     this.on('suite:end', function(suit) {
-        console.log('Suit end');
         if (suit.parent === null) {
             allure.endSuite();
         } else {
-            allure.endCase()
+            allure.endCase('passed')
         }
     });
 
     this.on('test:start', function (test) {
-        test.parent = 'ddfgdfgdg'
-        console.log('This is a step'+test.parent)
         allure.startStep(test.title)
-        allure.endStep()
     });
 
-    this.on('test:end', function (){
+    this.on('test:pass', () => {
+        allure.endStep('passed')
+    })
 
+    this.on('test:fail', function(test) {
+        const status = test.err.stack.includes('AssertionError [ERR_ASSERTION]') === true ? 'failed' : 'broken'
+        allure.endStep(status)
+        allure.endCase(status, test.err)
     });
 };
 

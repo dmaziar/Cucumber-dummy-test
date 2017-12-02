@@ -130,7 +130,7 @@ exports.config = {
     reporters: [testReporter2],
      cucumberOpts: {
        require: [
-           './features/step_definition/googleSteps.js',
+           './features/step_definitions/googleSteps.js',
        ],
      },
     //
