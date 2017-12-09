@@ -1,4 +1,7 @@
+@featureTag
 Feature: test feature
+
+  @testTag @testTag2
   Scenario Outline: find nordea
     Given google is opened
     When search for nordea

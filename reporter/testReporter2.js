@@ -13,8 +13,14 @@ let testReporter2 = function(options) {
         if (suit.parent === null) {
             allure.startSuite(suit.title);
         } else {
-            // allureRuntime.addLabel('Bug','123456')
             allure.startCase(suit.title+id);
+            const currentTest = allure.getCurrentTest()
+            currentTest.addLabel('issue', "http://www.google.com")
+            currentTest.addLabel('testId','Test testId')
+            currentTest.setDescription('test description', 'test')
+            currentTest.addParameter('environment-variable', 'URL', process.env.URL)
+            currentTest.addParameter('environment-variable', 'Feature name', suit.specs[0])
+            console.log(suit)
         }
         id++;
     });
