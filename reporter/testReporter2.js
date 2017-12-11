@@ -2,9 +2,18 @@ let util = require('util'),
     events = require('events'),
     Allure = require('allure-js-commons'),
     AllureRuntime = require('allure-js-commons/runtime'),
-    allureRuntime = new AllureRuntime(),
     allure = new Allure(),
     id =0;
+
+function getTags (tags) {
+    let tagsString,
+        defectsString
+    if (tags.length !==0) {
+        for (let i = 0; i<tags.length; i++) {
+
+        }
+    }
+}
 
 let testReporter2 = function(options) {
     allure.setOptions({ targetDir: options.outputDir || 'allure-results' })
